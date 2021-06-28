@@ -4,7 +4,7 @@
 
 ## init the dataset
 
-first go into the preutils dir run:
+first go into the preUtils dir run:
 
 $bash preprocess.sh
 
