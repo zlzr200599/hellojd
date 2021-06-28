@@ -13,7 +13,7 @@ after the exec of preprocess.sh, you will see a dir named dataset. copy the data
 
 $mv dataset ../src/main/resource/
 
-## install & package into jar(No Need, there's a jar already.)
+## install & package into jar(No Need, here's a jar already.)
 
 cd /path_to_your_dir/hellojd
 
