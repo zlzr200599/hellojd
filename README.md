@@ -11,3 +11,7 @@ $bash preprocess.sh
 after the exec of preprocess.sh, you will see a dir named dataset. copy the dataset dir to the resource dir
 
 $mv dataset ../src/main/resource/
+
+## run the packaged project
+
+$java -jar  target/hellojd-0.0.1-SNAPSHOT.jar
