@@ -1,3 +1,4 @@
+![image](https://github.com/lexsaints/powershell/blob/master/IMG/ps2.png)
 # 工程简介
 
 # 延伸阅读
