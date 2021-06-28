@@ -7,7 +7,7 @@ import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileReader;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -61,7 +61,13 @@ public class LogisticsDataset {
         JSONParser parser = new JSONParser();
         try {
 //            Object obj = parser.parse(new FileReader("src/main/resources/dataset/collect2bitmap.json"));
-            Object obj = parser.parse(new FileReader(LogisticsDataset.class.getResource("/dataset/collect2bitmap.json").getFile()));
+//            Object obj = parser.parse(new FileReader(LogisticsDataset.class.getResource("/dataset/collect2bitmap.json").getFile()));
+            InputStream stream = getClass()
+                    .getClassLoader()
+                    .getResourceAsStream("dataset/collect2bitmap.json");
+            BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+            Object obj = parser.parse(br);
+
             Map<String, JSONArray> jsonObject = (Map<String, JSONArray>) obj;
             for(Map.Entry<String, JSONArray> addr : jsonObject.entrySet()){
                 int len = addr.getValue().size();
@@ -73,7 +79,12 @@ public class LogisticsDataset {
             }
 //            System.out.println(collect.get("18:")[415]);
 //            obj = parser.parse(new FileReader("src/main/resources/dataset/route2bitmap.json"));
-            obj = parser.parse(new FileReader(LogisticsDataset.class.getResource("/dataset/route2bitmap.json").getFile()));
+//            obj = parser.parse(new FileReader(LogisticsDataset.class.getResource("/dataset/route2bitmap.json").getFile()));
+            stream = getClass()
+                    .getClassLoader()
+                    .getResourceAsStream("dataset/route2bitmap.json");
+            br = new BufferedReader(new InputStreamReader(stream));
+            obj = parser.parse(br);
             jsonObject = (Map<String, JSONArray>) obj;
             for(Map.Entry<String, JSONArray> addr : jsonObject.entrySet()){
                 int len = addr.getValue().size();
@@ -83,7 +94,12 @@ public class LogisticsDataset {
                 }
                 route.put(addr.getKey(), oneAddressCollect);
             }
-            obj = parser.parse(new FileReader(LogisticsDataset.class.getResource("/dataset/dispatch2bitmap.json").getFile()));
+//            obj = parser.parse(new FileReader(LogisticsDataset.class.getResource("/dataset/dispatch2bitmap.json").getFile()));
+            stream = getClass()
+                    .getClassLoader()
+                    .getResourceAsStream("dataset/dispatch2bitmap.json");
+            br = new BufferedReader(new InputStreamReader(stream));
+            obj = parser.parse(br);
             jsonObject = (Map<String, JSONArray>) obj;
             for(Map.Entry<String, JSONArray> addr : jsonObject.entrySet()){
                 int len = addr.getValue().size();
