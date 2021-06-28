@@ -8,6 +8,6 @@ first go into the preUtils dir run:
 
 $bash preprocess.sh
 
-after the exec, you will see a dir named dataset.copy the dataset dir to the resource dir
+after the exec of preprocess.sh, you will see a dir named dataset. copy the dataset dir to the resource dir
 
 $mv dataset ../src/main/resource/
