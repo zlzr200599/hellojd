@@ -10,4 +10,4 @@ $bash preprocess.sh
 
 after the exec, you will see a dir named dataset.copy the dataset dir to the resource dir
 
-$mv dataset ../src/main/resource
+$mv dataset ../src/main/resource/
