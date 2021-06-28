@@ -19,6 +19,6 @@ cd /path_to_your_dir/hellojd
 
 mvn clean install
 
-## TL;DR  =>  run the packaged project
+## TL;DR  =>  run the packaged project <span style="color: green"> TL;DR  =>  run the packaged project </span> 
 
 $java -jar  /path_to_your_dir/hellojd/target/hellojd-0.0.1-SNAPSHOT.jar
