@@ -22,7 +22,7 @@ public class LogisticsController {
     @GetMapping(path = "{src}/{dst}/{start}")
     String myTest(@PathVariable("src") String src,
                   @PathVariable("dst") String dst,
-                  @PathVariable("start") String start) throws ParseException {
+                  @PathVariable("start") String start) throws Exception {
 
 //        long s = System.currentTimeMillis();
 //        for(int i = 0; i < 100000; i += 1) {
@@ -36,6 +36,7 @@ public class LogisticsController {
 //                + dst + "\t"
 //                + start + "\t"
 //                + "<br> database" + logisticsService.getArrivalTime(src, dst, Long.valueOf(start));
+//                logisticsDataset.getMultiArrivalTime(src,dst,Long.valueOf(start));
                 logisticsDataset.getArrivalTime(src,dst,Long.valueOf(start));
 //                + logisticsService.getArrivalTime(src,dst,Long.valueOf(start));
 

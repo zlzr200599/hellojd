@@ -8,9 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.*;
 
 public class LogisticsDataset {
     private final static Logger LOGGER = LoggerFactory.getLogger(LogisticsDataset.class);
@@ -25,14 +27,83 @@ public class LogisticsDataset {
     public String getArrivalTime(String src, String dst, Long startTime) throws ParseException {
         int a, b, c;
         a = getCollectionTime(src, dst, startTime);
+        if (a < 0) return "-1";
         b = getRouterTime(src, dst, startTime);
+        if (b < 0) return "-1";
         c = getDispatchTime(dst, startTime);
-
-        return (a >=0 && b >= 0 && c >= 0)
+//        (a >=0 && b >= 0 && c >= 0)
+        return (c >= 0)
                 ? trans2TimeTuple(startTime, (long)a, (long)b, (long)c)
                 : "-1" ;
     }
 
+//    public String getMultiArrivalTime(String src, String dst, Long startTime) throws Exception{
+//        // 三个线程的线程池，核心线程=最大线程，没有临时线程，阻塞队列无界
+//        ExecutorService executor = Executors.newFixedThreadPool(3);
+//
+//        // 开启线程执行
+//        // 注意，此处Future对象接收线程执行结果不会阻塞，只有future.get()时候才会阻塞（直到线程执行完返回结果）
+//        Future future1 = executor.submit(new CollectCalculator(src, dst, startTime));
+//
+//        Future future2 = executor.submit(new RouteCalculator(src, dst, startTime));
+//
+//        Future future3 = executor.submit(new DispatchCalculator(src, dst, startTime));
+////        此处用循环保证三个线程执行完毕，再去拼接三个结果
+//        do{
+//            ;
+//        }while (!(future1.isDone() && future2.isDone() && future3.isDone()));
+////        executor.awaitTermination(5, TimeUnit.SECONDS);
+//        int a, b, c;
+//        a = (int) future1.get();
+//        b = (int) future2.get();
+//        c = (int) future3.get();
+//
+//        return (a >=0 && b >= 0 && c >= 0)
+//                ? trans2TimeTuple(startTime, (long)a, (long)b, (long)c)
+//                : "-1" ;
+//    }
+//    public class CollectCalculator implements Callable<Integer> {
+//        String src;
+//        String dst;
+//        Long startTime;
+//        public CollectCalculator(String src, String dst, Long startTime) {
+//            this.src = src;
+//            this.dst = dst;
+//            this.startTime = startTime;
+//        }
+//        @Override
+//        public Integer call() throws Exception {
+//            return getCollectionTime(src, dst, startTime);
+//        }
+//    }
+//    public class RouteCalculator implements Callable<Integer> {
+//        String src;
+//        String dst;
+//        Long startTime;
+//        public RouteCalculator(String src, String dst, Long startTime) {
+//            this.src = src;
+//            this.dst = dst;
+//            this.startTime = startTime;
+//        }
+//        @Override
+//        public Integer call() throws Exception {
+//            return getRouterTime(src, dst, startTime);
+//        }
+//    }
+//    public class DispatchCalculator implements Callable<Integer> {
+//        String src;
+//        String dst;
+//        Long startTime;
+//        public DispatchCalculator(String src, String dst, Long startTime) {
+//            this.src = src;
+//            this.dst = dst;
+//            this.startTime = startTime;
+//        }
+//        @Override
+//        public Integer call() throws Exception {
+//            return getDispatchTime(dst, startTime);
+//        }
+//    }
     public LogisticsDataset() {
         this.collect = new HashMap<>();
         this.route = new HashMap<>();
